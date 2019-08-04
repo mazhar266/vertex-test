@@ -1,0 +1,31 @@
+# Author: Mazhar Ahmed, CTO, Oceanize Inc
+# All rights reserved. Copyright (c) Oceanize Inc
+version: '3'
+services:
+  app:
+    image: humblemaze/vertex:latest
+    container_name: vertex_app
+    restart: always
+    build:
+      # build the image from Dockerfile
+      context: .
+      dockerfile: Dockerfile
+    labels:
+      autoheal: "true"
+    # environment:
+    #   # set database, redis etc credentials
+    #   DB_HOST: mongo
+    #   CACHE_HOST: redis
+    # links:
+    #   # network connection with these services
+    #   - mongo
+    #   - redis
+    # depends_on:
+    #   # build those images first
+    #   - mongo
+    #   - redis
+    volumes:
+      - "./app:/app"
+    ports:
+      # bind on our 8080 port to 8080 port
+      - "3000:80"
